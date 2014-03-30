@@ -1,0 +1,1 @@
+-record(node, {value, left=nil, right=nil}).

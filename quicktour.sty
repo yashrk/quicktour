@@ -1,0 +1,145 @@
+\RequirePackage{ifxetex}
+\ifxetex
+%% Russian
+% Babel
+  %% \RequirePackage[utf8]{inputenc}
+  %% \RequirePackage[english,russian]{babel}
+  %% \RequirePackage[T2A]{fontenc} % cyrillic font encoding
+% Polyglossia
+  \RequirePackage{polyglossia}
+  \setdefaultlanguage[spelling=modern]{russian}
+  \setotherlanguage{english}
+  \defaultfontfeatures{Mapping=tex-text} % I want russian quotes and normal dashes!
+  % Paratype fonts
+  \setmainfont{PT Serif}
+  \setsansfont{PT Sans}
+  \setmonofont{CMU Typewriter Text}
+\else
+  \RequirePackage[utf8]{inputenc}
+  \RequirePackage[english,russian]{babel}
+  \RequirePackage{PTSans}
+  \RequirePackage{PTSerif}
+%  \RequirePackage[T1]{fontenc}
+\fi
+%%
+\RequirePackage{listings}
+\RequirePackage{graphicx}
+\RequirePackage{hyperref}
+\RequirePackage{indentfirst}
+\RequirePackage{pstricks-add}
+\RequirePackage{pst-plot}
+\RequirePackage{wrapfig}
+\RequirePackage{alltt}
+\RequirePackage{amsmath}
+\RequirePackage{xskak}
+\RequirePackage{chessboard}
+\RequirePackage{epic}
+\RequirePackage{eepic}
+\RequirePackage{tikz}
+\RequirePackage{pgf-umlsd}
+\RequirePackage{longtable}
+\RequirePackage{tabu}
+%
+\usetikzlibrary{arrows,shadows}
+%%----------------------------------------
+%% Мои определения
+% Задача
+\newtheorem{problem}{Задача}[chapter]
+% Обозначение задачи повышенной сложности
+\newcommand{\complicated}{$\ast$}
+% Двойные угловые скобки (для бинарных строк)
+\newcommand{\lbp}{<{}<}
+\newcommand{\rbp}{>{}>}
+% Эпиграф
+\newcommand{\epigraph}[2]
+{\hfill \begin{minipage}[h]{0.45\textwidth}\tolerance=300\emergencystretch=25pt\hfuzz=5pt
+#1
+\begin{flushright}
+#2
+\end{flushright}
+\end{minipage}
+}
+% Врезка
+\newcommand{\important}[1]
+% O большое означает: сделать врезки расположенными на внешней стороне страницы (o) и плавающими (верхний регистр).
+{\begin{wrapfigure}{O}{.3\textwidth}
+\begin{minipage}{\dimexpr\linewidth-2\fboxrule-2\fboxsep}
+\footnotesize\tolerance=100\emergencystretch=15pt\hfuzz=10pt
+#1
+\end{minipage}
+\end{wrapfigure}
+}
+% Команда в эрланговском шелле
+\newcounter{erlcommand}
+\setcounter{erlcommand}{1}
+\newcommand{\erlshell}[3][]{
+\begin{alltt}#1\arabic{erlcommand}> #2\\
+#3
+\end{alltt}
+\addtocounter{erlcommand}{1}
+}
+% Решение задачи
+\newcommand{\solution}[1]
+{
+\subsection*{Задача \ref{#1}}
+}
+% Табличка с описанием функций
+\newenvironment{funcdescr}{
+  \begin{longtabu} to \linewidth {X X[2.8]}
+}{
+  \end{longtabu}
+}
+% Описание функции
+\newcommand{\funcdoc}[2]
+{
+\lstinline{#1} & #2 \\
+\\
+}
+
+%% Шрифт заголовков в LaTeX-версии
+%% \ifxetex
+%% \else
+% \renewcommand*\sectfont{\sffamily\fontseries{mcb}\selectfont}
+% \renewcommand*\sectfont{\fontfamily{DejaVuSansCondensed-TLF}\fontseries{b}\selectfont}
+%% \renewcommand*\sectfont{\fontfamily{DejaVuSansCondensed-TLF}\selectfont}
+%% \fi
+
+%% Моноширинные шрифты в примерах кода
+\lstset{basicstyle=\ttfamily}
+
+%%----------------------------------------
+%% Переносы
+%\hyphenation{эр-ланг-ов-ский}
+%%----------------------------------------
+
+%% Борьба с глюками автоматической вёрстки
+%%
+%% Количество букв слова, оставляемых в другой строке
+% \righthyphenmin=2
+%% "Быстрый и грязный" способ борьбы с переполнениями
+% \sloppy
+%% Терпимость ко слишком растянутым строкам
+%% Значение по умолчанию --- 200
+%% Максимальное значение --- 10000
+\tolerance=2000
+%% Штраф за частоту переносов
+%% Запретить переносы --- 10000
+\hyphenpenalty=9999
+%% Штраф за переносы в словах с дефисом
+\exhyphenpenalty=0
+%% На сколько можно дополнительно растягивать строку
+\emergencystretch=75pt
+%% Штраф за переносы, идущие подряд
+%% Значение по умолчанию --- 10000
+%% Максимальное значение --- 1000000
+\doublehyphendemerits=1000000
+%% Штраф за переносы в последней строке
+%% Значение по умолчанию --- 5000
+\finalhyphendemerits=10000000
+%% Допустимая неряшливость выравнивания абзаца
+%% Значение по умолчанию --- 0.1pt
+\hfuzz=0.5pt
+%% Не переносить сноски к последней строке на следующую строку
+\interfootnotelinepenalty=10000
+%%----------------------------------------
+\makeindex

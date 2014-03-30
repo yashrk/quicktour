@@ -1,0 +1,1 @@
+-record(weapon, {type, level=0, damage=1}).

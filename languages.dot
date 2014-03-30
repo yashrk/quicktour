@@ -1,0 +1,138 @@
+// Command line: dot -Tps:cairo -o languages.ps languages.dot
+digraph g {
+        node [fontsize=24];
+        ranksep = .3;
+        nodesep = .5;
+        // Lisp
+        lisp [label = "Lisp\n1958"];
+        cl [label = "Common Lisp\n1984"];
+        scheme [label = "Scheme\n1975"];
+        arc [label = "Arc\n2008"];
+        clojure [label = "Clojure\n2007"];
+        {
+                edge [style="dashed"];
+                cl -> clojure;
+        }
+        // ML
+        ml [label = "ML\n1973"];
+        sml [label = "StandardML\n1990"];
+        caml [label = "Caml\n1985"];
+        ocaml [label = "OCaml\n1996"];
+        fsharp [label = "F#\n2005"];
+        haskell [label = "Haskell\n1990"];
+        // Scala
+        scala [label = "Scala\n2003"];
+        // Prolog
+        prolog [label = "Prolog\n1972"];
+        erlang [label = "Erlang\n1986"];
+        // Refal
+        refal [label = "&#1056;&#1045;&#1060;&#1040;&#1051;\n1966"];
+        // Phantom
+        {
+                node [style="invis", label=""];
+                phantom1960;
+                phantom1970;
+                phantom1980;
+                phantom1990;
+                phantom2000;
+        }
+        //
+        // LINKS
+        //
+        // Phantom
+        {
+                edge [style="invis"];
+                phantom1960 -> phantom1970;
+                phantom1970 -> phantom1980;
+                phantom1980 -> phantom1990;
+                phantom1990 -> phantom2000;
+        }
+        // Lisp
+        lisp -> scheme;
+        lisp -> cl;
+        lisp -> arc;
+        lisp -> clojure;
+        {
+                // Timeline
+                edge [style="invis"];
+                phantom1970 -> scheme;
+                phantom1980 -> cl;
+                phantom2000 -> clojure;
+                phantom2000 -> arc;
+                lisp -> phantom1960;
+                scheme -> phantom1980;
+                cl -> phantom1990;
+        }
+        // ML
+        ml -> sml;
+        ml -> caml;
+        caml -> ocaml;
+        ocaml -> fsharp;
+        {
+                // Timeline
+                edge [style="invis"];
+                phantom1970 -> ml;
+                phantom1980 -> caml;
+                phantom1990 -> sml;
+                phantom1990 -> ocaml;
+                phantom2000 -> fsharp;
+                ml -> phantom1980;
+                caml -> phantom1990;
+                sml -> phantom2000;
+                ocaml -> phantom2000;
+        }
+        // Haskell
+        {
+                edge [style="dashed"];
+                ml -> haskell;
+        }
+        {
+                // Timeline
+                edge [style="invis"];
+                phantom1990 -> haskell;
+                haskell -> phantom2000;
+        }
+        // Prolog
+        prolog -> erlang;
+        {
+                // Timeline
+                edge [style="invis"];
+                phantom1970 -> prolog;
+                phantom1980 -> erlang;
+                prolog -> phantom1980;
+                erlang -> phantom1990;
+        }
+        // Scala
+        {
+                edge [style="dashed"];
+                ml -> scala;
+        }
+        {
+                // Timeline
+                edge [style="invis"];
+                phantom2000 -> scala;
+        }
+        // Refal
+        {
+                edge [style="invis"];
+                phantom1960 -> refal;
+                refal -> phantom1970;
+        }
+        // Timeline, decades
+        {
+                edge [style="invis"];
+                // 1970
+                // prolog -> ml;
+                // ml -> scheme;
+                // 1980
+                //cl -> caml;
+                //caml -> erlang;
+                // 1990
+                ml -> ocaml;
+                haskell -> ocaml;
+                // 2000
+                //scala -> fsharp;
+                //fsharp -> clojure;
+                //clojure -> arc;
+        }
+}
